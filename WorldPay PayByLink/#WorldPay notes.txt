@@ -1,0 +1,25 @@
+A simple shortcode that creates a payment link within your content. 
+The user is directed to a product summary page and then directed to WolrdPay to complete the transaction.
+
+
+
+*Upload your logo.png and payment page files under;
+WorldPay > Setup > Edit Payment Pages > 'your installation id' > File Management
+
+*Using the Worldpay Business Manager:
+http://support.worldpay.com/support/kb/bg/businessmanager/wh0000.html
+
+*Integrating your website with Worldpay:
+http://support.worldpay.com/support/kb/bg/htmlredirect/Content/rhtml/Integrating_your_website_with.htm
+
+*Using parameters and tags:
+http://support.worldpay.com/support/kb/bg/customisingadvanced/custa7600.html
+
+*HTML Redirect parameters:
+http://support.worldpay.com/support/kb/bg/htmlredirect/Content/rhtml/HTML_Redirect_parameters.htm
+
+*Payment Response Guide:
+http://support.worldpay.com/support/kb/bg/paymentresponse/pr0000.html
+
+*Test card numbers:
+http://support.worldpay.com/support/kb/bg/testandgolive/tgl5103.html
