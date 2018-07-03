@@ -1,0 +1,30 @@
+.vs_logo{ display:block; width:300px; margin:auto;}
+.vs_logo img{ display:block; width:100%;}
+
+td.one td{padding:10px 0;}
+td.title h1{ display:none;}
+td.three{ background:#dddddd !important; color:#000000;}
+
+div.container{
+	border: 1px solid #555;
+	border-radius: 5px;
+	width: 610px;
+	padding: 5px;
+	margin: auto;
+	text-align: center;
+}
+
+.result{ width:610px; text-align:center;}
+.result td{}
+.result h2{ margin:10px 0;}
+.result .bannercontainer, .result .bannercontainer .banner{ width:100% !important}
+
+a.button{
+	display:inline-block;
+	border: 1px solid #555;
+	border-radius: 5px;
+	background:none;
+	padding:10px 5px;
+	text-decoration:none;
+}
+a, a:hover, a:visited{color:#555;}

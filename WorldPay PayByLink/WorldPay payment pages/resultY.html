@@ -1,0 +1,61 @@
+<!--For a successful transaction-->
+<!--http://support.worldpay.com/support/kb/bg/customisingadvanced/custa0000.html-->
+<html>
+<head>
+<title>Payment Successful</title>
+<style>
+	<wpdisplay file=stylesheet.css>
+</style>
+</head>
+<body>
+	<wpdisplay file=header.html default="<p>error: header not available</p>">
+		<table class="result">
+			<tbody>
+			<tr>
+				<td>
+					<h1>Success!</h1>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2>Transaction Details</h2>
+					<p>Transaction ID: <wpdisplay item=transId></p>
+					<p>Card Type: <wpdisplay item=cardType></p>
+					<p>Date / Time: <wpdisplay item=transTime></p>
+					<p>Company Name:<wpdisplay item=compName></p>           
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2>Product Details</h2>
+					<p>Product ID: <wpdisplay item=cartId></p>
+					<p>Product Description: <wpdisplay item=desc></p>
+					<p>Price: <wpdisplay item=currency> <wpdisplay item=amount></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2>User Details</h2>
+					<p>Cardholders Name: <wpdisplay item=name></p>            
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>&nbsp;</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p><a class="button" href='<wpdisplay item=CM_successfulUrl>&pid=<wpdisplay item=cartId>'>Return to VetSkill<br />&larr;</a></p>
+					<p><a href="javascript:window.print()">Print /save this page</a></p>
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td>
+					<wpdisplay item=banner>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	<wpdisplay file=footer.html default="<p>error: footer not available</p>">
+</html>

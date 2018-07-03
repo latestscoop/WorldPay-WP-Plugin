@@ -1,0 +1,27 @@
+<!--For a cancelled transaction-->
+<!--http://support.worldpay.com/support/kb/bg/customisingadvanced/custa0000.html-->
+<html>
+<head>
+<title>Payment Cancelled</title>
+<style>
+	<wpdisplay file=stylesheet.css>
+</style>
+</head>
+<body>
+	<wpdisplay file=header.html default="<p>error: header not available</p>">
+		<table class="result">
+			<tr>
+				<td>
+					<h1>Cancelled</h1>
+					<p>Your payment was cancelled.</p>
+					<p><a class="button" href='<wpdisplay item=CM_successfulUrl>&pid=<wpdisplay item=cartId>'>Return to VetSkill<br />&larr;</a></p>
+				</td>
+			</tr>
+			<tr style="display:none;">
+				<td>
+					<wpdisplay item=banner>
+				</td>
+			</tr>
+		</table>
+	<wpdisplay file=footer.html default="<p>error: footer not available</p>">
+</html>
