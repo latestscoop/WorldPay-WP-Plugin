@@ -38,8 +38,11 @@ function register_settings_paybylink() {
 	register_setting( 'register_settings_paybylink', 'paybylink_testMode' ); //Test on = 100 or 101 | Test off = 0
 	register_setting( 'register_settings_paybylink', 'paybylink_instId' );
 	register_setting( 'register_settings_paybylink', 'paybylink_currency' ); //GBP
-	register_setting( 'register_settings_paybylink', 'paybylink_redirect' ); //GBP
+	register_setting( 'register_settings_paybylink', 'paybylink_redirect' );
+	register_setting( 'register_settings_paybylink', 'paybylink_confirm_email');
+	//register_setting( 'register_settings_paybylink', 'paybylink_confirm_email', array('type'=>'string','sanitize_callback'=>'sanitize_text_field','default'=>'default') );
 	//unregister_setting( 'register_settings_paybylink', 'paybylink_' );
+	//unregister_setting( 'register_settings_paybylink', 'paybylink_confirm_email' );
 }
 global $paybylink_compName; $paybylink_compName = get_option( 'paybylink_compName' );
 global $paybylink_page_name; $paybylink_page_name = get_option( 'paybylink_page_name' );
@@ -52,6 +55,7 @@ global $paybylink_testMode; $paybylink_testMode = get_option( 'paybylink_testMod
 global $paybylink_instId; $paybylink_instId = get_option( 'paybylink_instId' );
 global $paybylink_currency; $paybylink_currency = get_option( 'paybylink_currency' );
 global $paybylink_redirect; $paybylink_redirect = get_option( 'paybylink_redirect' );
+global $paybylink_confirm_email; $paybylink_confirm_email = get_option( 'paybylink_confirm_email' );
 global $paybylink_template; $paybylink_template = plugin_dir_path( __FILE__ ) . 'template.php';
 global $paybylink_url;
 global $paybylink_url_id;
@@ -153,7 +157,7 @@ function paybylink_shortcode($atts,$content = null){
 		'test' => 'off',
 	),$atts));
 	$paybylink_url_params = 'c=' . $cartid . '&' . 'n=' . $name . '&' . 'd=' . $desc . '&' . 'a=' . $amount . '&' . 'b=' . $button;
-	$paybylink_url_params .= ($test == 'on' ? '&t=' . $cartid : '');
+	$paybylink_url_params .= ($test == 'on' ? '&t=' . 'on' : '');
 	$paybylink_url_params = paybylink_crypted($paybylink_url_params,'encrypt');
 	$output = '<a href="' . $paybylink_url . '?pbl=' . $paybylink_url_params . '">' . $button . '</a>';
 	if($cartid == '' || $name == '' || $desc == '' || $amount == '' || $button == ''){

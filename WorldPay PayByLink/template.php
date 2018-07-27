@@ -22,11 +22,29 @@ headers
 		$desc = $d;
 		$amount = $a;
 		$button = $b;
-		$paybylink_testMode = (isset($t) && $t != 'on' ? '100' : '0');
+		$paybylink_testMode = (isset($t) && $t != '' ? '100' : '0');
 		$paybylink_url_params_get = paybylink_crypted($paybylink_url_params_get,'encrypt');
 	}
+	
 	$paybylink_success = ($paybylink_redirect == '' ? $_SESSION['paybylink_button_url'] : $paybylink_redirect);
 	if(isset($_GET['pay']) && $_GET['pay'] == 'successful'){
+		$paybylink_confirm_email = get_option( 'paybylink_confirm_email' );
+		if($paybylink_confirm_email != ''){
+			$to = $paybylink_confirm_email;
+			$from = (get_bloginfo('admin_email') != '' ? get_bloginfo('admin_email') : $to);
+			$subject = 'WorldPay - Confirmation Email';
+			$message = '<h1>' . 'Payment confirmation' . '</h1>';
+			$message .= '<p>' . 'Product name: ' . $name . '</p>';
+			$message .= '<p>' . 'Product description: ' . $desc . '</p>';
+			$message .= '<p>' . 'Product id: ' . $cartId . '</p>';
+			$message .= '<p>' . 'Price: ' . $amount . '</p>';
+			$message .= '<p>' . 'Date/time: ' . date("l jS \of F Y h:i:s A") . '</p>';
+			$message .= '<p>' . 'Transaction ID: ' . (isset($_GET['tid']) ? $_GET['tid'] : 'error') . '</p>';
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$headers .="From:" . $from . "\r\n" . "Reply-To: " . $from . "\r\n";
+			wp_mail( $to, $subject, $message, $headers );
+		}
 		header( "refresh:2;url=" . $paybylink_success);
 	}
 ?>
@@ -99,8 +117,8 @@ headers
 			<!--<input type="hidden" name="C_XXX" value="">/*custom parameter for the customers result page*/-->
 			<!--<input type="hidden" name="M_XXX" value="">/*custom parameter for our payment response message*/-->
 			<!--<input type="hidden" name="CM_XXX" or MC_XXX value="">/*custom parameter for the customers result page and our payment response message*/-->
-			<input type="hidden" name="CM_successfulUrl" value="<?php echo $paybylink_url . '?pay=successful'; ?>">
-			<input type="hidden" name="CM_cancelledUrl" value="<?php echo $paybylink_url . '?pbl=' . $paybylink_url_params_get . '&pay=cancelled'; ?>">
+			<input type="hidden" name="CM_successfulUrl" value="<?php echo $paybylink_url . '?pay=successful&pbl=' . $paybylink_url_params_get; ?>">
+			<input type="hidden" name="CM_cancelledUrl" value="<?php echo $paybylink_url . '?pay=cancelled&pbl=' . $paybylink_url_params_get; ?>">
 		<!---->
 			<!--<input type="submit" value="<?php// echo $button; ?>">-->
 			<!--<input type="submit" class="continue" value="Accept and continue to pay">-->
@@ -112,6 +130,11 @@ headers
 		<?php
 		if($paybylink_testMode != '0'){
 			echo '<p style="color:red;">Test mode on (' . $paybylink_testMode . ')</p>';
+			$paybylink_url_params_get = paybylink_crypted($_GET['pbl'],'decrypt');
+			parse_str($paybylink_url_params_get, $paybylink_url_params_array);
+			echo '<pre>';
+			print_r($paybylink_url_params_array);
+			echo '</pre>';
 		}
 		?>
 	<?php endif; ?>
